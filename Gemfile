@@ -19,15 +19,15 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'roo'
 gem 'bootstrap'
-
+gem 'carrierwave'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rails-footnotes'
   gem 'meta_request'
   gem 'annotate'
-  gem "better_errors" ,'1.1.0'
-  gem "binding_of_caller"
+  gem 'better_errors' ,'1.1.0'
+  gem 'binding_of_caller'
 end
 
 group :development do

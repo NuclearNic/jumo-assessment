@@ -15,7 +15,9 @@
 
 class Loan < ApplicationRecord
 
-
+	belongs_to :loan_file
+	belongs_to :network
+	belongs_to :product
 
 
 end

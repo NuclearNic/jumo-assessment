@@ -2,21 +2,45 @@
 
 <div class="container">
   <h2>Loans</h2>
-  <p>description</p>            
+  <p>description of table</p>            
   <table class="table table-bordered table-striped">
     <thead>
 			<tr>
-				<th>Loan</th>
+				<th>MSISDN</th>
+				<th>Network</th>
+				<th>Product</th>
+				<th>Date</th>
+				<th>Amount</th>
 			</tr>
 		</thead>
     <tbody>
 	    <% Loan.all.each do |loan| %>
 	      <tr>
-	        <td>
-	         	<%= loan.id %>   
-	        </td>
+	        <td><%= loan.msisdn %></td>
+	       	<td><%= loan.network_id %></td>
+	       	<td><%= loan.product_id %></td>
+	       	<td><%= loan.date %></td>
+	       	<td><%= loan.amount %></td> 
 	      </tr>
 	    <% end %>
     </tbody>
   </table>
 </div>
+
+<!-- <div class="container">
+	<h3>Upload New Loan File</h3>
+	<%= form_tag( '/loan_files', multipart: true) do %>
+
+	  <%= submit_tag "Import" %>	
+		<%= text_field_tag :msisdn %>	
+	  <%= file_field_tag :file %>
+	
+	<% end %>
+</div> -->
+<h3><strong>Upload New Loan File</strong></h3>
+	<%= form_for(@loan_file, multipart: true) do |f| %>
+		
+  <%= f.file_field :file %>
+  <%= submit_tag "Import" %>
+
+	<% end %>

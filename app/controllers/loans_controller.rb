@@ -2,7 +2,7 @@ class LoansController < ApplicationController
 
 
   def index
-  	
+  	@loan_file = LoanFile.new
   end
 
 
