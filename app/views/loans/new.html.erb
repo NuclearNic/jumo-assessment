@@ -1,0 +1,10 @@
+
+
+<h1><strong>Upload New Loan File</strong></h1>
+	<%= form_for(@loan, multipart: true) do |f| %>
+		
+	<%= f.text_field :msisdn %>	
+  <%= f.file_field :file %>
+  <%= submit_tag "Import" %>
+
+	<% end %>

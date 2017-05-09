@@ -1,0 +1,22 @@
+
+
+<div class="container">
+  <h2>Loans</h2>
+  <p>description</p>            
+  <table class="table table-bordered table-striped">
+    <thead>
+			<tr>
+				<th>Loan</th>
+			</tr>
+		</thead>
+    <tbody>
+	    <% Loan.all.each do |loan| %>
+	      <tr>
+	        <td>
+	         	<%= loan.id %>   
+	        </td>
+	      </tr>
+	    <% end %>
+    </tbody>
+  </table>
+</div>
