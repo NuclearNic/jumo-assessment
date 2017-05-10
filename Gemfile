@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'roo'
 gem 'bootstrap'
+gem 'fog-aws'
 gem 'carrierwave'
 gem 'jquery-datatables-rails'
 
