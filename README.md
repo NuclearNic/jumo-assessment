@@ -1,6 +1,11 @@
 README
 ======
 
+# PLEASE NOTE:
+* There is a version of this assessment running on Heroku. It is on a free dyno so it may 
+take up to 30 seconds to start up the first time. It can be found here: https://jumo-assessment.herokuapp.com/
+
+
 ### Database structure
 
 # Loan
