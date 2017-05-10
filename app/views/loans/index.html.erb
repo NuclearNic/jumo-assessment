@@ -1,10 +1,16 @@
 
+<div class="container loans-index">
 
-<div class="container">
-
-  <h3>Loans</h3>
-  <p>description of table</p>            
-  <table class="table table-bordered table-striped">
+	<h2>Jumo Assessment: Generation of Spreadsheet with Aggregate Loans</h2>
+	<br>
+	<p>To Generate the required CSV file:</p>
+	<p>1) Upload file(s) containing the relevant data by choosing the file, selecting its date range, and clicking the 'Upload' button.</p>
+	<p>2) Select the range of the data of the required file, and click the 'Generate' button. The file will be added to 'Generated Files' table and can be downloaded by clicking on 'Open'.</p>
+	
+	<hr>	
+  
+  <h3>Loans Table</h3>
+  <table id="loan" class="table table-hover table-bordered table-striped">
     <thead>
 			<tr>
 				<th>MSISDN</th>
@@ -21,89 +27,115 @@
 	       	<td><%= loan.network.name %></td>
 	       	<td><%= loan.product.name %></td>
 	       	<td><%= loan.date.strftime("%b %d, %Y") %></td>
-	       	<td><%= loan.amount %></td> 
+	       	<td><%= number_to_currency(loan.amount, unit: 'R') %></td> 
 	      </tr>
 	    <% end %>
     </tbody>
   </table>
 
-  <br><br><br>
-	<h3>Uploaded Files</h3>
-	<table class="table table-bordered table-striped">
-    <thead>
-			<tr>
-				<th>Start Date</th>
-				<th>End Date</th>
-			</tr>
-		</thead>
-    <tbody>
-	    <% @loan_files.where(file_origin: 'uploaded').each do |loan_file| %>
-	      <tr>
-	        <td><%= loan_file.start_date %></td>
-	       	<td><%= loan_file.end_date %></td>
-	      </tr>
-	    <% end %>
-    </tbody>
-  </table>
+  <br><hr><br>
 
+  <div class="row">
+  	<div class="col-md-6">
+			<h3>Uploaded Files</h3>
+			<table id="uploaded" class="table table-hover table-bordered table-striped">
+		    <thead>
+					<tr>
+						<th>Start Date</th>
+						<th>End Date</th>
+					</tr>
+				</thead>
+		    <tbody>
+			    <% @loan_files.where(file_origin: 'uploaded').each do |loan_file| %>
+			      <tr>
+			        <td><%= loan_file.start_date.strftime("%b %d, %Y") %></td>
+			       	<td><%= loan_file.end_date.strftime("%b %d, %Y") %></td>
+			      </tr>
+			    <% end %>
+		    </tbody>
+		  </table>
+		 </div>
+  	<div class="col-md-6">
+			<h3>Generated Files</h3>
+			<table id="generated" class="table table-hover table-bordered table-striped">
+		    <thead>
+					<tr>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>File</th>
+					</tr>
+				</thead>
+		    <tbody>
+			    <% @loan_files.where(file_origin: 'generated').each do |loan_file| %>
+			      <tr>
+			        <td><%= loan_file.start_date.strftime("%b %d, %Y") %></td>
+			       	<td><%= loan_file.end_date.strftime("%b %d, %Y") %></td>
+			       	<td><%= link_to "Open",loan_file.file.url %></td>
+			      </tr>
+			    <% end %>
+		    </tbody>
+		  </table>
+		</div>
+	</div>
 
-	<h3>Upload New Loan File</h3>
 	
-	<%= form_for(@loan_file, multipart: true) do |f| %>
-		
-		<div class="form-group">
-			<%= label_tag :start_date %>
-			<%= f.date_select(:start_date) %>
-		</div>	
-		<div class="form-group">
-			<%= label_tag :end_date %>
-			<%= f.date_select(:end_date) %>
-		</div>
-		<div class="form-group">
-		  <%= f.file_field :file %>
-  		<%= f.hidden_field(:file_origin, :value => 'uploaded') %>
-  		<%= submit_tag "Import" %>
-		</div>
+	<br><hr><br>
+  <div class="row">
+  	<div class="col-md-6">
+  		<h4>Upload New Loan File</h4><br>
+			<%= form_for(@loan_file, multipart: true) do |f| %>
+				<div class="form-group">
+					<p>Start Date:</p>
+					<%= f.date_select :start_date,{:prompt =>{:day=>'Select day',:month =>'Select month',:year =>'Select year'}},{:class =>'date-select',:required => true} %>
+				</div>	
+				<div class="form-group">
+					<p>End Date:</p>
+					<%= f.date_select :end_date,{:prompt =>{:day=>'Select day',:month =>'Select month',:year =>'Select year'}},{:class =>'date-select',:required => true} %>
+				</div>
+				<div class="form-group">
+				  <%= f.file_field :file, :required => true %>
+		  		<%= f.hidden_field(:file_origin, :value => 'uploaded') %>
+		  	</div>
+		  	<div class="form-group">
+		  		<%= submit_tag "Upload", :class => "btn btn-primary	 btn-large" %>
+				</div>
+			<% end %>
+  	</div>
+  	<div class="col-md-6">
+  		<h4>Generate Aggregate Loan File</h4><br>
+			<%= form_for(@loan_file, multipart: true) do |f| %>
+			 <div class="form-group">
+					<p>Start Date:</p>
+					<%= f.date_select :start_date,{:prompt =>{:day=>'Select day',:month =>'Select month',:year =>'Select year'}},{:class =>'date-select',:required => true} %>
+				</div>	
+				<div class="form-group">
+					<p>End Date:</p>
+					<%= f.date_select :end_date,{:prompt =>{:day=>'Select day',:month =>'Select month',:year =>'Select year'}},{:class =>'date-select',:required => true} %>
+				</div>
+				<div class="form-group">
+		  		<%= f.hidden_field(:file_origin, :value => 'generated') %>
+		  		<%= submit_tag "Generate" , :class => "btn btn-primary btn-large"%>
+				</div>
+			<% end %>
+  	</div>
 
-	<% end %>
-
-  <br><br><br>
-	<h3>Generated Files</h3>
-	<table class="table table-bordered table-striped">
-    <thead>
-			<tr>
-				<th>Start Date</th>
-				<th>End Date</th>
-				<th>File</th>
-			</tr>
-		</thead>
-    <tbody>
-	    <% @loan_files.where(file_origin: 'generated').each do |loan_file| %>
-	      <tr>
-	        <td><%= loan_file.start_date %></td>
-	       	<td><%= loan_file.end_date %></td>
-	       	<td><%= link_to "Open",loan_file.file.url, class: 'btn btn-link' %></td>
-	      </tr>
-	    <% end %>
-    </tbody>
-  </table>
+</div> 
 
 
-	<h3>Generate Loan File</h3>
-	
-	<%= form_for(@loan_file, multipart: true) do |f| %>
-	 <div class="form-group">
-			<%= label_tag :start_date %>
-			<%= f.date_select(:start_date, :order => [:month, :day, :year]) %>
-		</div>	
-		<div class="form-group">
-			<%= label_tag :end_date %>
-			<%= f.date_select(:end_date, :order => [:month, :day, :year]) %>
-		</div>
-		<div class="form-group">
-  		<%= f.hidden_field(:file_origin, :value => 'generated') %>
-  		<%= submit_tag "Generate" %>
-		</div>
-	<% end %>
-
-</div>
+<script type="text/javascript">
+  $(function () {
+    $("#loan").dataTable({
+    	"aaSorting": [],
+      "pageLength": 10
+    });
+    $("#uploaded").dataTable({
+    	"aaSorting": [],
+      "pageLength": 10
+    });
+    $("#generated").dataTable({
+    	"aaSorting": [],
+      "pageLength": 10
+    });
+    $(".dataTables_length select").addClass("datatable-length-select");
+  });
+</script>

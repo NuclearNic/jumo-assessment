@@ -11,9 +11,9 @@ class LoanFilesController < ApplicationController
     respond_to do |format|
       if @loan_file.save
       	@loan_file.create_loans_from_file unless @loan_file.generated?
-        format.html { redirect_to loans_path, notice: 'File uploaded.' }
+        format.html { redirect_to loans_path,  :flash => { :success => 'File successfully uploaded' } }
       else
-      	format.html { redirect_to loans_path, notice: 'File failed to upload' }
+      	format.html { redirect_to loans_path, :flash => { :warning => 'File failed to upload' } }
       end
     end
   end

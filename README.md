@@ -3,21 +3,23 @@ README
 
 ### Database structure
 
-#Loan
+# Loan
 * datetime field in case of different timezones
 
 
-#LoanFile
+# LoanFile
 * Since the uploaded and generated files are almost identical in structure
-Product
-Network
 
+# Product
+
+# Network
 
 
 ### Gems used
 
 * roo: Parsing .csv files
 * rails-footnotes: Outputs detailed DB query information. Practically this is how n+1 queries are caught.
+* jquery-datatables-rails: For sorting and pagination of displayed tables.
 
 ### Considerations
 

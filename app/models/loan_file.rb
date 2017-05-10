@@ -16,7 +16,10 @@ class LoanFile < ApplicationRecord
 	mount_uploader :file, LoanFileUploader
 	has_many :loans
 
+	validates_presence_of :file
+
   enum file_origin: [:uploaded, :generated]
+
 
 	# TODO: Prevent multiple upload of the same file
 	def create_loans_from_file

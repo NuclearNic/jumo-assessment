@@ -9,9 +9,36 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
+ *= require dataTables/jquery.dataTables
  *= require_tree .
  *= require_self
  */
 
 	@import "bootstrap";
 
+.loans-index{
+	background-color: #e0e2e2;
+	margin-top: 20px;
+	padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+}
+
+select.date-select {
+    // width:auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}
+
+.datatable-length-select {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+}

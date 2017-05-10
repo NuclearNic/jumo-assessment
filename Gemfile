@@ -20,6 +20,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'roo'
 gem 'bootstrap'
 gem 'carrierwave'
+gem 'jquery-datatables-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
