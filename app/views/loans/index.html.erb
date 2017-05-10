@@ -1,7 +1,8 @@
 
 
 <div class="container">
-  <h2>Loans</h2>
+
+  <h3>Loans</h3>
   <p>description of table</p>            
   <table class="table table-bordered table-striped">
     <thead>
@@ -25,15 +26,84 @@
 	    <% end %>
     </tbody>
   </table>
-</div>
+
+  <br><br><br>
+	<h3>Uploaded Files</h3>
+	<table class="table table-bordered table-striped">
+    <thead>
+			<tr>
+				<th>Start Date</th>
+				<th>End Date</th>
+			</tr>
+		</thead>
+    <tbody>
+	    <% @loan_files.where(file_origin: 'uploaded').each do |loan_file| %>
+	      <tr>
+	        <td><%= loan_file.start_date %></td>
+	       	<td><%= loan_file.end_date %></td>
+	      </tr>
+	    <% end %>
+    </tbody>
+  </table>
 
 
-<div class="container">
 	<h3>Upload New Loan File</h3>
 	
 	<%= form_for(@loan_file, multipart: true) do |f| %>
-	  <%= f.file_field :file %>
-	  <%= submit_tag "Import" %>
+		
+		<div class="form-group">
+			<%= label_tag :start_date %>
+			<%= f.date_select(:start_date) %>
+		</div>	
+		<div class="form-group">
+			<%= label_tag :end_date %>
+			<%= f.date_select(:end_date) %>
+		</div>
+		<div class="form-group">
+		  <%= f.file_field :file %>
+  		<%= f.hidden_field(:file_origin, :value => 'uploaded') %>
+  		<%= submit_tag "Import" %>
+		</div>
+
+	<% end %>
+
+  <br><br><br>
+	<h3>Generated Files</h3>
+	<table class="table table-bordered table-striped">
+    <thead>
+			<tr>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>File</th>
+			</tr>
+		</thead>
+    <tbody>
+	    <% @loan_files.where(file_origin: 'generated').each do |loan_file| %>
+	      <tr>
+	        <td><%= loan_file.start_date %></td>
+	       	<td><%= loan_file.end_date %></td>
+	       	<td><%= link_to "Open",loan_file.file.url, class: 'btn btn-link' %></td>
+	      </tr>
+	    <% end %>
+    </tbody>
+  </table>
+
+
+	<h3>Generate Loan File</h3>
+	
+	<%= form_for(@loan_file, multipart: true) do |f| %>
+	 <div class="form-group">
+			<%= label_tag :start_date %>
+			<%= f.date_select(:start_date, :order => [:month, :day, :year]) %>
+		</div>	
+		<div class="form-group">
+			<%= label_tag :end_date %>
+			<%= f.date_select(:end_date, :order => [:month, :day, :year]) %>
+		</div>
+		<div class="form-group">
+  		<%= f.hidden_field(:file_origin, :value => 'generated') %>
+  		<%= submit_tag "Generate" %>
+		</div>
 	<% end %>
 
 </div>

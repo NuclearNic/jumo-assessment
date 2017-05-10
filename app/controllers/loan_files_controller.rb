@@ -1,11 +1,16 @@
 class LoanFilesController < ApplicationController
 
   def create
-    @loan_file = LoanFile.new(loan_file_params)
+    
+      @loan_file = LoanFile.new(loan_file_params)
+
+      if params[:loan_file][:file_origin] == 'generated'
+        @loan_file.file = @loan_file.generate_loan_file
+      end
 
     respond_to do |format|
       if @loan_file.save
-      	@loan_file.create_loans_from_file
+      	@loan_file.create_loans_from_file unless @loan_file.generated?
         format.html { redirect_to loans_path, notice: 'File uploaded.' }
       else
       	format.html { redirect_to loans_path, notice: 'File failed to upload' }
@@ -18,7 +23,7 @@ class LoanFilesController < ApplicationController
   private
 
     def loan_file_params
-      params.require(:loan_file).permit(:file)
+      params.require(:loan_file).permit(:file, :start_date, :end_date, :file_origin)
     end
 
 end

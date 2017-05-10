@@ -3,9 +3,13 @@ class LoansController < ApplicationController
 
   def index
   	@loans = Loan.includes(:network).includes(:product)
+  	@loan_files = LoanFile.all
   	@loan_file = LoanFile.new
   end
 
+  def output_csv
+
+  end
 
   private
 
