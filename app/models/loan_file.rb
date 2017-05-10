@@ -32,7 +32,7 @@ class LoanFile < ApplicationRecord
 
 	def generate_loan_file
 		
-		CSV.open("file.csv", "wb") do |csv|
+		CSV.open("public/tmp/Output.csv", "wb") do |csv|
 
 			csv << ['Network','Product','Month','Amount']		
 			loans = Loan.where('date BETWEEN ? AND ?', self.start_date, self.end_date)

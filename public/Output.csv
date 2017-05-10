@@ -1,0 +1,9 @@
+Network,Product,Month,Amount
+'Network 1','Loan Product 1',March,7000.0
+'Network 2','Loan Product 1',March,7854.0
+'Network 3','Loan Product 2',March,14588.0
+'Network 1','Loan Product 2',March,21686.0
+'Network 2','Loan Product 1',April,39697.0
+'Network 3','Loan Product 3',April,13496.0
+'Network 2','Loan Product 3',April,12229.0
+'Network 1','Loan Product 2',April,82607.0
