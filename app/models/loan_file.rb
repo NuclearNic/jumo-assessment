@@ -14,13 +14,16 @@ class LoanFile < ApplicationRecord
 	has_many :loans
 
 
-
 	# TODO: Prevent multiple upload of the same file
 	def create_loans_from_file
 
-		# TODO: Find or create network and product per row
 		CSV.foreach(open(LoanFile.first.file.path), :headers => true, :col_sep => ',') do |row|
-			Loan.create(msisdn: row['MSISDN'], amount: row['Amount'])
+		
+ 			date = Date.parse(row['Date'].gsub(/'/,""))
+			network = Network.find_or_create_by(name: row['Network'])	
+			product = Product.find_or_create_by(name: row['Product'])	
+			Loan.create(msisdn: row['MSISDN'], amount: row['Amount'], network_id: network.id, product_id: product.id, loan_file_id: self.id, date: date)
+
 		end
 
 

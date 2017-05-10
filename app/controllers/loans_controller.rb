@@ -2,6 +2,7 @@ class LoansController < ApplicationController
 
 
   def index
+  	@loans = Loan.includes(:network).includes(:product)
   	@loan_file = LoanFile.new
   end
 

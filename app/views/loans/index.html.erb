@@ -14,12 +14,12 @@
 			</tr>
 		</thead>
     <tbody>
-	    <% Loan.all.each do |loan| %>
+	    <% @loans.each do |loan| %>
 	      <tr>
 	        <td><%= loan.msisdn %></td>
-	       	<td><%= loan.network_id %></td>
-	       	<td><%= loan.product_id %></td>
-	       	<td><%= loan.date %></td>
+	       	<td><%= loan.network.name %></td>
+	       	<td><%= loan.product.name %></td>
+	       	<td><%= loan.date.strftime("%b %d, %Y") %></td>
 	       	<td><%= loan.amount %></td> 
 	      </tr>
 	    <% end %>
@@ -27,20 +27,13 @@
   </table>
 </div>
 
-<!-- <div class="container">
+
+<div class="container">
 	<h3>Upload New Loan File</h3>
-	<%= form_tag( '/loan_files', multipart: true) do %>
-
-	  <%= submit_tag "Import" %>	
-		<%= text_field_tag :msisdn %>	
-	  <%= file_field_tag :file %>
 	
-	<% end %>
-</div> -->
-<h3><strong>Upload New Loan File</strong></h3>
 	<%= form_for(@loan_file, multipart: true) do |f| %>
-		
-  <%= f.file_field :file %>
-  <%= submit_tag "Import" %>
-
+	  <%= f.file_field :file %>
+	  <%= submit_tag "Import" %>
 	<% end %>
+
+</div>
