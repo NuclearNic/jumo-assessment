@@ -11,7 +11,7 @@ class LoanFilesController < ApplicationController
     respond_to do |format|
       if @loan_file.save
       	@loan_file.create_loans_from_file unless @loan_file.generated?
-        format.html { redirect_to loans_path,  :flash => { :success => 'File successfully uploaded' } }
+        format.html { redirect_to loans_path,  :flash => { :success => 'File successfully created' } }
       else
         @loan_file.errors.messages[:file_origin].present? ? message = 'File failed to upload: A file has already been uploaded with this date range.' : message = 'File failed to upload'
       	format.html { redirect_to loans_path, :flash => { :warning => message } }
