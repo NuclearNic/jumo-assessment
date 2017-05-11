@@ -7,8 +7,6 @@ take up to 30 seconds to start up the first time. It can be found here: https://
 
 * Files (both uploaded and generated) are stored on an Amazon S3 bucket.
 
-* Since a 'readme.txt' file was specifically requested, a copy of 'README.md' has been saved as such.
-
 ## Database structure
 
 ### Loan

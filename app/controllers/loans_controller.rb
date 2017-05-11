@@ -7,10 +7,6 @@ class LoansController < ApplicationController
   	@loan_file = LoanFile.new
   end
 
-  def output_csv
-
-  end
-
   private
 
     def loan_params

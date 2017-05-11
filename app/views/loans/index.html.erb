@@ -43,6 +43,7 @@
 					<tr>
 						<th>Start Date</th>
 						<th>End Date</th>
+						<th>Uploaded</th>
 					</tr>
 				</thead>
 		    <tbody>
@@ -50,6 +51,7 @@
 			      <tr>
 			        <td><%= loan_file.start_date.strftime("%b %d, %Y") %></td>
 			       	<td><%= loan_file.end_date.strftime("%b %d, %Y") %></td>
+			       	<td><%= loan_file.created_at.strftime("%b %d, %Y") %></td>
 			      </tr>
 			    <% end %>
 		    </tbody>

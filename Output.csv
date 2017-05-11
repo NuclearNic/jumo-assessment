@@ -1,0 +1,9 @@
+Network,Product,Month,Loan Count,Aggregate Amount
+'Network 1','Loan Product 1',March,3,3000.0
+'Network 2','Loan Product 1',March,3,3366.0
+'Network 3','Loan Product 2',March,3,6252.0
+'Network 1','Loan Product 2',March,3,9294.0
+'Network 2','Loan Product 1',April,3,17013.0
+'Network 3','Loan Product 3',April,3,5784.0
+'Network 2','Loan Product 3',April,3,5241.0
+'Network 1','Loan Product 2',April,7,145403.0
