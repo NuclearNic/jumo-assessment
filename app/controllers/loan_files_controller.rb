@@ -18,8 +18,6 @@ class LoanFilesController < ApplicationController
     end
   end
 
-
-
   private
 
     def loan_file_params

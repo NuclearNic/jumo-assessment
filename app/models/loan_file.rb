@@ -45,4 +45,10 @@ class LoanFile < ApplicationRecord
 		end
 	end
 
+
+	def file_path
+		Rails.env.production? ? self.file.url : self.file.path
+	end
+
+
 end
