@@ -23,7 +23,7 @@ class LoanFile < ApplicationRecord
 
 	# TODO: Prevent multiple upload of the same file
 	def create_loans_from_file
-		CSV.foreach(open(self.file.path), :headers => true, :col_sep => ',') do |row|
+		CSV.foreach(open(self.file_path), :headers => true, :col_sep => ',') do |row|
 			network = Network.find_or_create_by(name: row['Network'])	
 			product = Product.find_or_create_by(name: row['Product'])	
 			Loan.create(msisdn: row['MSISDN'], amount: row['Amount'], network_id: network.id, product_id: product.id, loan_file_id: self.id, date: Date.parse(row['Date'].gsub(/'/,"")))
