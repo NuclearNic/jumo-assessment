@@ -27,6 +27,8 @@ this functionality can be removed easily, whereas it would have been more diffic
 * These get created on file upload. The product and network names are required to be unique.
 
 
+## Libraries used
+
 ### Gems used
 
 * roo: Parsing .csv files
@@ -37,6 +39,10 @@ this functionality can be removed easily, whereas it would have been more diffic
 * carrierwave: Handles file uploads.
 * fog-aws: For uploading files to Amazon S3.
 * bootstrap: Styling.
+
+
+## Other Information
+
 
 ### Performance and Scaling Considerations
 

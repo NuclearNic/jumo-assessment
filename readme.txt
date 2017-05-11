@@ -7,6 +7,8 @@ take up to 30 seconds to start up the first time. It can be found here: https://
 
 * Files (both uploaded and generated) are stored on an Amazon S3 bucket.
 
+* Since a 'readme.txt' file was specifically requested, a copy of 'README.md' has been saved as such.
+
 ## Database structure
 
 ### Loan
@@ -25,6 +27,8 @@ this functionality can be removed easily, whereas it would have been more diffic
 * These get created on file upload. The product and network names are required to be unique.
 
 
+## Libraries used
+
 ### Gems used
 
 * roo: Parsing .csv files
@@ -35,6 +39,10 @@ this functionality can be removed easily, whereas it would have been more diffic
 * carrierwave: Handles file uploads.
 * fog-aws: For uploading files to Amazon S3.
 * bootstrap: Styling.
+
+
+## Other Information
+
 
 ### Performance and Scaling Considerations
 
