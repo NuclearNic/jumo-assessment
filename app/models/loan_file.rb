@@ -25,15 +25,22 @@ class LoanFile < ApplicationRecord
 	# TODO: Prevent multiple upload of the same file
 	def create_loans_from_file
 
+		if	Rails.env.production?
 
-# f = CSV.parse(open(l.file_path).read, :headers => true, :col_sep => ',')
-
-
-		CSV.foreach(open(self.file_path), :headers => true, :col_sep => ',') do |row|
-			network = Network.find_or_create_by(name: row['Network'])	
-			product = Product.find_or_create_by(name: row['Product'])	
-			Loan.create(msisdn: row['MSISDN'], amount: row['Amount'], network_id: network.id, product_id: product.id, loan_file_id: self.id, date: Date.parse(row['Date'].gsub(/'/,"")))
-		end
+			CSV.parse(d, headers:true).each do |row|
+				network = Network.find_or_create_by(name: row['Network'])	
+				product = Product.find_or_create_by(name: row['Product'])	
+				Loan.create(msisdn: row['MSISDN'], amount: row['Amount'], network_id: network.id, product_id: product.id, loan_file_id: self.id, date: Date.parse(row['Date'].gsub(/'/,"")))
+			end
+		
+		else
+			# f = CSV.parse(open(l.file_path).read, :headers => true, :col_sep => ',')
+			CSV.foreach(open(self.file_path), :headers => true, :col_sep => ',') do |row|
+				network = Network.find_or_create_by(name: row['Network'])	
+				product = Product.find_or_create_by(name: row['Product'])	
+				Loan.create(msisdn: row['MSISDN'], amount: row['Amount'], network_id: network.id, product_id: product.id, loan_file_id: self.id, date: Date.parse(row['Date'].gsub(/'/,"")))
+			end
+		end	
 	end
 
 	def generate_loan_file
