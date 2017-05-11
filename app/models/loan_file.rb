@@ -27,7 +27,7 @@ class LoanFile < ApplicationRecord
 
 		if	Rails.env.production?
 
-			CSV.parse(open(l.file_path).read(), headers:true).each do |row|
+			CSV.parse(open(self.file_path).read(), headers:true).each do |row|
 				network = Network.find_or_create_by(name: row['Network'])	
 				product = Product.find_or_create_by(name: row['Product'])	
 				Loan.create(msisdn: row['MSISDN'], amount: row['Amount'], network_id: network.id, product_id: product.id, loan_file_id: self.id, date: Date.parse(row['Date'].gsub(/'/,"")))
